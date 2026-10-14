@@ -40,10 +40,23 @@
   }
   h1,h2,h3{font-family:'Playfair Display',serif;font-weight:500;line-height:1.15}
 
-  /* ornament divider */
-  .orn{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 auto;color:var(--accent);opacity:.9}
-  .orn::before,.orn::after{content:"";height:1px;width:46px;background:var(--line)}
-  .orn span{font-size:15px;transform:translateY(-1px)}
+  /* ===== Қазақы ою-өрнек ===== */
+  .orn{display:flex;align-items:center;justify-content:center;gap:16px;margin:0 auto;color:var(--accent)}
+  .orn::before,.orn::after{content:"";height:1px;width:42px;background:linear-gradient(90deg,transparent,var(--accent));opacity:.55}
+  .orn::after{background:linear-gradient(90deg,var(--accent),transparent)}
+  .orn .motif{width:64px;height:26px;color:var(--accent)}
+
+  /* су ою — бөлімдер арасындағы жолақ */
+  .ornband{height:20px;margin:0 auto;max-width:460px;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='20' viewBox='0 0 44 20'%3E%3Cpath d='M0 14 Q11 2 22 14 Q33 2 44 14' fill='none' stroke='%23b0895b' stroke-width='1.2' stroke-linecap='round'/%3E%3Ccircle cx='0' cy='14' r='1.4' fill='%23b0895b'/%3E%3Ccircle cx='22' cy='14' r='1.4' fill='%23b0895b'/%3E%3Ccircle cx='44' cy='14' r='1.4' fill='%23b0895b'/%3E%3C/svg%3E");
+    background-repeat:repeat-x;background-position:center}
+
+  /* бұрыш оюлары (hero жиегі) */
+  .corner{position:absolute;width:40px;height:40px;color:var(--accent);opacity:.75;pointer-events:none;z-index:1}
+  .corner.tl{top:28px;left:28px}
+  .corner.tr{top:28px;right:28px;transform:scaleX(-1)}
+  .corner.bl{bottom:28px;left:28px;transform:scaleY(-1)}
+  .corner.br{bottom:28px;right:28px;transform:scale(-1,-1)}
 
   /* ===== HERO ===== */
   .hero{
@@ -180,14 +193,38 @@
 </head>
 <body>
 
+<!-- Қазақы ою символдары -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="orn-horn" viewBox="0 0 64 40">
+    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <path d="M32 20 C22 20 19 11 12 11 C4 11 3 20 9 22 C13 23.5 17.5 20.5 15 16.5"/>
+      <path d="M32 20 C42 20 45 11 52 11 C60 11 61 20 55 22 C51 23.5 46.5 20.5 49 16.5"/>
+      <path d="M32 20 C22 20 19 29 12 29 C4 29 3 20 9 18 C13 16.5 17.5 19.5 15 23.5"/>
+      <path d="M32 20 C42 20 45 29 52 29 C60 29 61 20 55 18 C51 16.5 46.5 19.5 49 23.5"/>
+    </g>
+    <circle cx="32" cy="20" r="2.3" fill="currentColor"/>
+  </symbol>
+  <symbol id="orn-corner" viewBox="0 0 48 48">
+    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <path d="M8 22 L8 8 L22 8"/>
+      <path d="M8 22 C8 29 13 31 17 28 C20 26 19 21 15 22"/>
+      <path d="M22 8 C29 8 31 13 28 17 C26 20 21 19 22 15"/>
+    </g>
+  </symbol>
+</svg>
+
 <!-- HERO -->
 <header class="hero">
   <div class="frame"></div>
+  <svg class="corner tl" viewBox="0 0 48 48"><use href="#orn-corner"/></svg>
+  <svg class="corner tr" viewBox="0 0 48 48"><use href="#orn-corner"/></svg>
+  <svg class="corner bl" viewBox="0 0 48 48"><use href="#orn-corner"/></svg>
+  <svg class="corner br" viewBox="0 0 48 48"><use href="#orn-corner"/></svg>
   <div class="hero-inner reveal">
     <div class="eyebrow">Той шақырту</div>
     <h1 class="names">Ербол<span class="amp">&amp;</span>Маржан</h1>
     <p class="sub">Шаңырақ көтеріп, отау құрған қуанышты күнімізге Сіздерді арнайы шақырамыз</p>
-    <div class="orn"><span>❧</span></div>
+    <div class="orn"><svg class="motif" viewBox="0 0 64 40"><use href="#orn-horn"/></svg></div>
     <div class="date">20 Қазан<span class="dot">•</span>2026</div>
   </div>
   <div class="scroll-cue">Төмен</div>
@@ -196,11 +233,13 @@
 <!-- GREETING -->
 <section class="greeting">
   <div class="wrap reveal center">
-    <div class="orn"><span>✦</span></div>
+    <div class="orn"><svg class="motif" viewBox="0 0 64 40"><use href="#orn-horn"/></svg></div>
     <p class="quote">«Қос жүрек бір арнаға тоғысқан шақ…»</p>
     <p>Өмірдегі ең қуанышты, ең жарқын күнімізде жанымызда болып, қуанышымызды бөлісуіңізді сұраймыз. Сіздердің ыстық лебізіңіз — біз үшін ең қымбат тілек.</p>
   </div>
 </section>
+
+<div class="ornband reveal" aria-hidden="true"></div>
 
 <!-- COUNTDOWN -->
 <section class="countdown-sec" style="padding-top:0">
@@ -296,9 +335,11 @@
   </div>
 </section>
 
+<div class="ornband reveal" aria-hidden="true"></div>
+
 <!-- FOOTER -->
 <footer class="reveal">
-  <div class="orn"><span>❧</span></div>
+  <div class="orn"><svg class="motif" viewBox="0 0 64 40"><use href="#orn-horn"/></svg></div>
   <p class="names" style="margin-top:18px">Ербол &amp; Маржан</p>
   <p>Сіздерді ыстық ықыласпен күтеміз!</p>
 </footer>
